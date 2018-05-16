@@ -1,0 +1,17 @@
+{
+  "name": "p5",
+  "authors": [
+    "lereverandnox <lereverandnox@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
