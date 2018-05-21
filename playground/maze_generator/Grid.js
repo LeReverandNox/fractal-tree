@@ -63,6 +63,21 @@ class Grid {
         }
     }
 
+    getWallsStateBetween(cellA, cellB) {
+        if (cellA.x < cellB.x) {
+            return cellA.wallDestroyed(Cell.RIGHT_WALL) && cellB.wallDestroyed(Cell.LEFT_WALL);
+        }
+        if (cellA.x > cellB.x) {
+            return cellA.wallDestroyed(Cell.LEFT_WALL) && cellB.wallDestroyed(Cell.RIGHT_WALL);
+        }
+        if (cellA.y < cellB.y) {
+            return cellA.wallDestroyed(Cell.DOWN_WALL) && cellB.wallDestroyed(Cell.UP_WALL);
+        }
+        if (cellA.y > cellB.y) {
+            return cellA.wallDestroyed(Cell.UP_WALL) && cellB.wallDestroyed(Cell.DOWN_WALL);
+        }
+    }
+
     addToVisitedCells(cell) {
         this.visitedCells.push(cell);
     }
@@ -91,6 +106,33 @@ class Grid {
 
         for (let cell of exitCells) {
             cell.toggleExit();
+        }
+    }
+
+    getMiddleCell(axis) {
+        let length;
+        if (axis === 'x') {
+            length = this.cols - 1;
+        }
+        if (axis === 'y') {
+            length = this.rows -1;
+        }
+
+        return floor(length / 2);
+    }
+
+    canExit(cell, toX, toY) {
+        if (cell.x < toX) {
+            return cell.wallDestroyed(Cell.RIGHT_WALL);
+        }
+        if (cell.x > toX) {
+            return cell.wallDestroyed(Cell.LEFT_WALL);
+        }
+        if (cell.y < toY) {
+            return cell.wallDestroyed(Cell.DOWN_WALL);
+        }
+        if (cell.y > toY) {
+            return cell.wallDestroyed(Cell.UP_WALL);
         }
     }
 }

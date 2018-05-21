@@ -171,4 +171,8 @@ class Cell {
         if (destroyedWall.name === 'RIGHT') { text = '▶'; }
         this.text = text;
     }
+
+    wallDestroyed(wall) {
+        return this.walls[wall].isDestroyed;
+    }
 }
