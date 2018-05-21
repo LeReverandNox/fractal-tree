@@ -17,7 +17,7 @@
     let game;
 
     function setup() {
-        createCanvas(COLS*CELL_SIZE + (WALL_THICKNESS / 2), ROWS*CELL_SIZE + (WALL_THICKNESS / 2));
+        createCanvas(COLS * CELL_SIZE + (WALL_THICKNESS / 2), ROWS * CELL_SIZE + (WALL_THICKNESS / 2));
         game = new Game();
         noLoop();
     }

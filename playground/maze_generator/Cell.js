@@ -33,9 +33,9 @@ class Cell {
                 isDestroyed: false,
                 formula: {
                     fromX: this.visualX,
-                    fromY: this.visualY + floor(this.wallsThickness/2),
+                    fromY: this.visualY + floor(this.wallsThickness / 2),
                     toX: this.visualX + this.cellSize,
-                    toY: this.visualY + floor(this.wallsThickness/2)
+                    toY: this.visualY + floor(this.wallsThickness / 2)
                 }
             },
             {
@@ -52,9 +52,9 @@ class Cell {
                 name: 'LEFT',
                 isDestroyed: false,
                 formula: {
-                    fromX: this.visualX + floor(this.wallsThickness/2),
+                    fromX: this.visualX + floor(this.wallsThickness / 2),
                     fromY: this.visualY,
-                    toX: this.visualX + floor(this.wallsThickness/2),
+                    toX: this.visualX + floor(this.wallsThickness / 2),
                     toY: this.visualY + this.cellSize
                 }
             },
@@ -100,7 +100,7 @@ class Cell {
         fill(color);
         let x = this.visualX + (this.wallsThickness / 2);
         let y = this.visualY + (this.wallsThickness / 2);
-        let size = this.cellSize - (this.wallsThickness/2);
+        let size = this.cellSize - (this.wallsThickness / 2);
         rect(x, y, size, size);
     }
 
