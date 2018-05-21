@@ -90,7 +90,7 @@ class Cell {
             fill(this.textColor);
             textAlign(CENTER, CENTER);
             let x = this.visualX + (this.wallsThickness / 2);
-            let y = this.visualY  + (this.wallsThickness / 2);
+            let y = this.visualY + (this.wallsThickness / 2);
             text(this.text, x, y, this.cellSize, this.cellSize);
         }
     }
@@ -99,7 +99,7 @@ class Cell {
         noStroke();
         fill(color);
         let x = this.visualX + (this.wallsThickness / 2);
-        let y = this.visualY  + (this.wallsThickness / 2);
+        let y = this.visualY + (this.wallsThickness / 2);
         let size = this.cellSize - (this.wallsThickness/2);
         rect(x, y, size, size);
     }
