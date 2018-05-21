@@ -11,70 +11,49 @@
     const BG_COLOR = 51;
     const P_SIZE = 30;
     const P_NAME_COLOR = 'black';
-    const P_COLOR = 'lime';
+    const P_COLOR = 'deeppink';
+    const NB_EXITS = 1
 
-    let grid;
-    let currentCell;
-    let player;
+    let game;
 
     function setup() {
         createCanvas(COLS*CELL_SIZE + (WALL_THICKNESS / 2), ROWS*CELL_SIZE + (WALL_THICKNESS / 2));
-        grid = new Grid(COLS, ROWS, CELL_SIZE, WALLS_COLOR, WALL_THICKNESS, TEXT_COLOR);
-        grid.makeExits();
-
-        player = new Player(grid, P_SIZE, 'P', P_NAME_COLOR, P_COLOR);
-
-        currentCell = grid.getCellAt(0, 0);
-        grid.addToVisitedCells(currentCell);
-        // noLoop();
+        game = new Game();
+        noLoop();
     }
 
     function draw() {
         background(BG_COLOR);
 
-        grid.show();
-        player.show();
-
-        if (!currentCell) {
-            return false;
-        }
-
-        currentCell.highlight(HL_CURRENT);
-        currentCell.toggleVisited();
-
-        let nextCell = currentCell.getRandomNeighbor();
-        if (nextCell) {
-            grid.breakWallsBetween(currentCell, nextCell);
-            nextCell.highlight(HL_NEXT);
-            nextCell.toggleVisited();
-            grid.addToVisitedCells(nextCell);
-
-            currentCell = nextCell;
-        } else {
-            currentCell = grid.removeFromVisitedCells();
-        }
+        game.loop();
     }
 
-    // function mousePressed() {
-    //     loop();
-    // }
+    function mousePressed() {
+        loop();
+    }
 
     function keyPressed() {
         switch (keyCode) {
             case 37:
-                player.move(Player.LEFT);
+                game.player.move(Player.LEFT);
+                return false;
                 break;
             case 38:
-                player.move(Player.UP);
+                game.player.move(Player.UP);
+                return false;
                 break;
             case 39:
-                player.move(Player.RIGHT);
+                game.player.move(Player.RIGHT);
+                return false;
                 break;
             case 40:
-                player.move(Player.DOWN);
+                game.player.move(Player.DOWN);
+                return false;
+                break;
+            case 82:
+                game.resetGame();
                 break;
             default:
                 break;
         }
-        return false;
     }
