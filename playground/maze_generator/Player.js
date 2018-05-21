@@ -30,8 +30,8 @@ class Player {
     }
 
     _updateVisualCoords() {
-        this.visualX = this.x * this.grid.cellSize + (this.grid.wallsThickness);
-        this.visualY = this.y * this.grid.cellSize + (this.grid.wallsThickness);
+        this.visualX = (this.x * this.grid.cellSize) + floor(this.grid.cellSize / 2) + floor(this.grid.wallsThickness / 2);
+        this.visualY = (this.y * this.grid.cellSize) + floor(this.grid.cellSize / 2) + floor(this.grid.wallsThickness / 2);
     }
 
     _canMoveTo(x, y) {
@@ -44,6 +44,8 @@ class Player {
             let exit = this.grid.canExit(currentCell, x, y);
             if (exit) {
                 console.log('YOU WIN');
+                this.name = 'GG';
+                this.score = 0;
             }
             return false;
         }
@@ -57,7 +59,7 @@ class Player {
         let desiredY = this.y + dir.y;
         if (this._canMoveTo(desiredX, desiredY)) {
             this.score += 1;
-            console.log(`YOUR SCORE : ${this.score}`);
+            this.name = this.score;
 
             this.x = desiredX;
             this.y = desiredY;
@@ -67,15 +69,17 @@ class Player {
     }
 
     show() {
+        push();
         noStroke();
         fill(this.color);
+        rectMode(CENTER);
         rect(this.visualX, this.visualY, this.size, this.size);
+        pop();
 
-
-        if (this.name) {
-            fill(this.nameColor);
-            textAlign(CENTER, CENTER);
-            text(this.name, this.visualX, this.visualY, this.size, this.size);
-        }
+        push();
+        fill(this.nameColor);
+        textAlign(CENTER, CENTER);
+        text(this.name, this.visualX - floor(this.size / 2), this.visualY - floor(this.size / 2), this.size, this.size);
+        pop();
     }
 }
