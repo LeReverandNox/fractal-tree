@@ -74,7 +74,7 @@ class Grid {
     _getRandomEdgeCell() {
         let x = floor(random(this.cols));
         let y = floor(random(this.rows));
-        if (x > y) {
+        if (x >= y) {
             x = random() > 0.5 ? 0 : this.cols - 1;
         } else {
             y = random() > 0.5 ? 0 : this.rows - 1;
@@ -84,8 +84,13 @@ class Grid {
     }
 
     makeExits(n = 2) {
-        for (let i = 0; i < n; i += 1) {
-            this._getRandomEdgeCell().toggleExit();
+        let exitCells = new Set();
+        while (exitCells.size < n) {
+            exitCells.add(this._getRandomEdgeCell());
+        }
+
+        for (let cell of exitCells) {
+            cell.toggleExit();
         }
     }
 }
