@@ -15,6 +15,7 @@
     const NB_EXITS = 1
 
     let game;
+let isLooping = false;
 
     function setup() {
         createCanvas(COLS * CELL_SIZE + (WALL_THICKNESS / 2), ROWS * CELL_SIZE + (WALL_THICKNESS / 2));
@@ -29,7 +30,13 @@
     }
 
     function mousePressed() {
+    if (isLooping) {
+        noLoop();
+        isLooping = false;
+    } else {
         loop();
+        isLooping = true;
+    }
     }
 
     function keyPressed() {
