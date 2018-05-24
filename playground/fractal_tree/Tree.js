@@ -48,7 +48,6 @@ class Tree {
         }
 
         let newBranches = [];
-        let length = (this.trunkLength * this.branchesCoef) / this.currDepth;
         let color = [];
         if (this.colorMode === Tree.RGB) {
             color[0] = (this.color[0] + ((this.colorCoef * this.currDepth) * 360)) % 360;
@@ -59,11 +58,14 @@ class Tree {
             color[1] = this.color[1];
             color[2] = this.color[2] - ((this.colorCoef * this.currDepth) * 100);
         }
-        let thickness = (this.trunkThickness * this.branchesCoef) / this.currDepth;
 
         for (let i = 1; i <= this.newBranches; i += 1) {
             let lastGenBranch = this.branches[this.branches.length - i];
             let startingVector = lastGenBranch.endVector;
+
+            let length = lastGenBranch.length * this.branchesCoef;
+            let thickness = (this.thickness * this.branchesCoef);
+
 
             let offset = floor(this.branchesNb /2);
             for (let i = -offset; i < this.branchesNb - offset; i += 1) {

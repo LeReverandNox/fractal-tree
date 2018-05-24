@@ -8,7 +8,7 @@ const DEF_TREE_DEPTH = 1;
 const DEF_TREE_COLOR_MODE = Tree.RGB;
 const DEF_TRUNK_LENGTH = 150;
 const DEF_TRUNK_THICKNESS = 3;
-const DEF_BRANCHES_COEF = 0.95;
+const DEF_BRANCHES_COEF = 0.75;
 const DEF_BRANCHES_NB = 2;
 const DEF_BRANCHES_ANGLE = 60;
 
@@ -77,13 +77,11 @@ function keyPressed() {
         // LEFT
         case 37:
             branchesCoef *= 0.95;
-            trunkLength *= 0.95;
             init();
             break;
         // RIGHT
         case 39:
             branchesCoef *= 1.05;
-            trunkLength *= 1.05;
             init();
             break;
         // +
@@ -106,6 +104,16 @@ function keyPressed() {
             treeDepth += 1;
             init();
             break;
+        // 9
+        case 57:
+            trunkLength *= 0.95;
+            init();
+            break;
+        // 0
+        case 48:
+            trunkLength *= 1.05;
+            init();
+            break;
         // SPACE
         case 32:
             treeColorMode = treeColorMode === Tree.RGB ? Tree.BW : Tree.RGB;
@@ -113,12 +121,12 @@ function keyPressed() {
             break;
         // A
         case 65:
-            treeStartAngle *= 0.95;
+            treeStartAngle -= 1;
             init();
             break;
         // E
         case 68:
-            treeStartAngle *= 1.05;
+            treeStartAngle += 1;
             init();
             break;
         // R
