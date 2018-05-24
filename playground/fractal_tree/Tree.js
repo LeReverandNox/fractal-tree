@@ -21,9 +21,9 @@ class Tree {
         this.newBranches = 0;
         this.branches = [];
 
-        if (this.colorMode === 1) {
+        if (this.colorMode === Tree.RGB) {
             this.color = [0, 97, 100];
-        } else if (this.colorMode === 2) {
+        } else if (this.colorMode === Tree.BW) {
             this.color = [0, 0, 100];
         }
 
@@ -48,16 +48,16 @@ class Tree {
         let newBranches = [];
         let length = (this.trunkLength * this.branchesCoef) / this.currDepth;
         let color = [];
-        if (this.colorMode === 1) {
+        if (this.colorMode === Tree.RGB) {
             color[0] = this.color[0] + (10 * this.currDepth);
             color[1] = this.color[1];
             color[2] = this.color[2];
-        } else if (this.colorMode === 2) {
+        } else if (this.colorMode === Tree.BW) {
             color[0] = this.color[0];
             color[1] = this.color[1];
             color[2] = this.color[2] - (10 * this.currDepth);
         }
-        let thickness = this.trunkThickness * this.branchesCoef;
+        let thickness = (this.trunkThickness * this.branchesCoef) / this.currDepth;
 
         for (let i = 1; i <= this.newBranches; i += 1) {
             let lastGenBranch = this.branches[this.branches.length - i];
