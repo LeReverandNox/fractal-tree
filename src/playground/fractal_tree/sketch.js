@@ -124,9 +124,19 @@ function keyPressed() {
             treeStartAngle -= 1;
             init();
             break;
-        // E
+        // D
         case 68:
             treeStartAngle += 1;
+            init();
+            break;
+        // Q
+        case 81:
+            trunkThickness -= 1;
+            init();
+            break;
+        // E
+        case 69:
+            trunkThickness += 1;
             init();
             break;
         // R

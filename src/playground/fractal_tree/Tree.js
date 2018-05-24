@@ -64,7 +64,7 @@ class Tree {
             let startingVector = lastGenBranch.endVector;
 
             let length = lastGenBranch.length * this.branchesCoef;
-            let thickness = (this.thickness * this.branchesCoef);
+            let thickness = (lastGenBranch.thickness * this.branchesCoef);
 
 
             let offset = floor(this.branchesNb /2);
