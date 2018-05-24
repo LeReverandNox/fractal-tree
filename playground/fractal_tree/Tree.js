@@ -22,10 +22,12 @@ class Tree {
         this.branches = [];
 
         if (this.colorMode === Tree.RGB) {
-            this.color = [0, 97, 100];
+            let startColor = floor(random(360));
+            this.color = [startColor, 97, 100];
         } else if (this.colorMode === Tree.BW) {
             this.color = [0, 0, 100];
         }
+        this.colorCoef = (100/this.depth * 0.01);
 
         this.generate();
     }
@@ -49,13 +51,13 @@ class Tree {
         let length = (this.trunkLength * this.branchesCoef) / this.currDepth;
         let color = [];
         if (this.colorMode === Tree.RGB) {
-            color[0] = this.color[0] + (10 * this.currDepth);
+            color[0] = (this.color[0] + ((this.colorCoef * this.currDepth) * 360)) % 360;
             color[1] = this.color[1];
             color[2] = this.color[2];
         } else if (this.colorMode === Tree.BW) {
             color[0] = this.color[0];
             color[1] = this.color[1];
-            color[2] = this.color[2] - (10 * this.currDepth);
+            color[2] = this.color[2] - ((this.colorCoef * this.currDepth) * 100);
         }
         let thickness = (this.trunkThickness * this.branchesCoef) / this.currDepth;
 
