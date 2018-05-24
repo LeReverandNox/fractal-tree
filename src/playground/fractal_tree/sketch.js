@@ -1,5 +1,5 @@
-const DEF_WIDTH = 1000;
-const DEF_HEIGHT = 900;
+const DEF_WIDTH = window.innerWidth - 10;
+const DEF_HEIGHT = window.innerHeight - 10;
 const DEF_BG_COLOR = 51;
 const DEF_TREE_START_X = DEF_WIDTH / 2;
 const DEF_TREE_START_Y = DEF_HEIGHT;
