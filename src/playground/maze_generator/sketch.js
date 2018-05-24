@@ -1,6 +1,6 @@
-const COLS = 15;
-const ROWS = 15;
 const CELL_SIZE = 30;
+const COLS = Math.floor(window.innerWidth / CELL_SIZE) -1;
+const ROWS = Math.floor(window.innerHeight / CELL_SIZE);
 const WALLS_COLOR = 'black';
 const WALL_THICKNESS = 3;
 const TEXT_COLOR = 'black';
@@ -21,6 +21,7 @@ function setup() {
     createCanvas(COLS * CELL_SIZE + (WALL_THICKNESS / 2), ROWS * CELL_SIZE + (WALL_THICKNESS / 2));
     game = new Game();
     noLoop();
+    frameRate(60);
 }
 
 function draw() {
