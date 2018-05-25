@@ -32,6 +32,7 @@ let helpLines = [
     'N : Select next tree',
     'X : Delete active tree',
     'C : Duplicate active tree',
+    'J : Hide HUD',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
@@ -40,6 +41,7 @@ let moveMode = true;
 let trees = [];
 let currentTree;
 let help = false;
+let hud = true;
 
 function setup() {
     createCanvas(DEF_WIDTH, DEF_HEIGHT);
@@ -68,7 +70,6 @@ function nextTree(n) {
     } else {
         currentTree = (currentTree + 1) % trees.length || 0;
     }
-    console.log(`CURRENT TREE #${currentTree}`);
 }
 
 function resetTree(i, x, y) {
@@ -139,7 +140,9 @@ function draw() {
         tree.show();
     }
 
-    showInfos();
+    if (hud) {
+        showInfos();
+    }
 }
 
 function keyPressed() {
@@ -247,9 +250,17 @@ function keyPressed() {
         case 72:
             help = !help;
             break;
+        // H
+        case 74:
+            hud = !hud;
+            break;
         // C
         case 67:
             duplicateTree(currentTree);
+            break;
+        // P
+        case 80:
+            saveFrames('fractal-tree', 'png', 1, 1);
             break;
         default:
             break;
