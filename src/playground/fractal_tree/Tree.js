@@ -7,7 +7,7 @@ class Tree {
         return 2;
     }
 
-    constructor(colorMode, depth, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, startingAngle, startingVector) {
+    constructor(colorMode, depth, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, startingAngle, x, y) {
         this.colorMode = colorMode;
         this.depth = depth;
         this.trunkLength = trunkLength;
@@ -16,7 +16,8 @@ class Tree {
         this.branchesNb = branchesNb;
         this.branchesAngle = branchesAngle;
         this.startingAngle = startingAngle;
-        this.startingVector = startingVector;
+        this.x = x;
+        this.y = y;
     }
 
     update() {
@@ -24,6 +25,7 @@ class Tree {
         this.currDepth = 0;
         this.newBranches = 0;
 
+        this.startingVector = createVector(this.x, this.y);
         if (this.colorMode === Tree.RGB) {
             let startColor = floor(random(360));
             this.color = [startColor, 97, 100];

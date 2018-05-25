@@ -1,3 +1,8 @@
+// Todo:
+// Save scene
+// Import saved scene
+// Export as png
+
 const DEF_WIDTH = window.innerWidth - 10;
 const DEF_HEIGHT = window.innerHeight - 10;
 const DEF_BG_COLOR = [202, 8, 19];
@@ -26,6 +31,7 @@ let helpLines = [
     'M : Change mode',
     'N : Select next tree',
     'X : Delete active tree',
+    'C : Duplicate active tree',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
@@ -40,9 +46,10 @@ function setup() {
     newTree();
 }
 
-function updateTrees(x, y) {
+function updateTree(x, y) {
     if (x && y) {
-        trees[currentTree].startingVector = createVector(x, y);
+        trees[currentTree].x = x;
+        trees[currentTree].y = y;
     }
     trees[currentTree].update();
 }
@@ -52,11 +59,7 @@ function newTree(x, y) {
     trees.push(tree);
     nextTree(trees.length - 1);
 
-    let startingVector;
-    if (x && y) {
-        startingVector = createVector(x, y);
-    }
-    resetTree(currentTree, startingVector);
+    resetTree(currentTree, x, y);
 }
 
 function nextTree(n) {
@@ -68,9 +71,8 @@ function nextTree(n) {
     console.log(`CURRENT TREE #${currentTree}`);
 }
 
-function resetTree(i, vector) {
+function resetTree(i, x, y) {
     let tree = trees[i];
-    let startingVector = vector || createVector(DEF_TREE_START_X, DEF_TREE_START_Y);
 
     tree.colorMode = DEF_TREE_COLOR_MODE;
     tree.depth = DEF_TREE_DEPTH;
@@ -80,7 +82,8 @@ function resetTree(i, vector) {
     tree.branchesNb = DEF_BRANCHES_NB;
     tree.branchesAngle = DEF_BRANCHES_ANGLE;
     tree.startingAngle = DEF_TREE_START_ANGLE;
-    tree.startingVector = startingVector;
+    tree.x = x || DEF_TREE_START_X;
+    tree.y = y || DEF_TREE_START_Y;
 
     tree.update();
 }
@@ -92,6 +95,26 @@ function removeTree(i) {
 
 function keepOneTree() {
     trees.splice(1);
+}
+
+function duplicateTree(i) {
+    let tree = new Tree();
+    let sourceTree = trees[i];
+
+    tree.colorMode = sourceTree.colorMode;
+    tree.depth = sourceTree.depth;
+    tree.trunkLength = sourceTree.trunkLength;
+    tree.trunkThickness = sourceTree.trunkThickness;
+    tree.branchesCoef = sourceTree.branchesCoef;
+    tree.branchesNb = sourceTree.branchesNb;
+    tree.branchesAngle = sourceTree.branchesAngle;
+    tree.startingAngle = sourceTree.startingAngle;
+    tree.x = sourceTree.x;
+    tree.y = sourceTree.y
+
+    tree.update();
+    trees.push(tree);
+    nextTree(trees.length - 1);
 }
 
 function showInfos() {
@@ -125,77 +148,77 @@ function keyPressed() {
         // UP
         case 38:
             trees[currentTree].branchesAngle *= 1.05;
-            updateTrees();
+            updateTree();
             break;
         // DOWN
         case 40:
             trees[currentTree].branchesAngle *= 0.95;
-            updateTrees();
+            updateTree();
             break;
         // LEFT
         case 37:
             trees[currentTree].branchesCoef *= 0.95;
-            updateTrees();
+            updateTree();
             break;
         // RIGHT
         case 39:
             trees[currentTree].branchesCoef *= 1.05;
-            updateTrees();
+            updateTree();
             break;
         // +
         case 187:
             trees[currentTree].branchesNb += 1;
-            updateTrees();
+            updateTree();
             break;
         // -
         case 189:
             trees[currentTree].branchesNb -= 1;
-            updateTrees();
+            updateTree();
             break;
         // [
         case 219:
             trees[currentTree].depth -= 1;
-            updateTrees();
+            updateTree();
             break;
         // ]
         case 221:
             trees[currentTree].depth += 1;
-            updateTrees();
+            updateTree();
             break;
         // 9
         case 57:
             trees[currentTree].trunkLength *= 0.95;
-            updateTrees();
+            updateTree();
             break;
         // 0
         case 48:
             trees[currentTree].trunkLength *= 1.05;
-            updateTrees();
+            updateTree();
             break;
         // SPACE
         case 32:
             trees[currentTree].colorMode = trees[currentTree].colorMode === Tree.RGB ? Tree.BW : Tree.RGB;
-            updateTrees();
+            updateTree();
             break;
         // A
         case 65:
             trees[currentTree].startingAngle -= 1;
-            updateTrees();
+            updateTree();
             break;
         // D
         case 68:
             trees[currentTree].startingAngle += 1;
-            updateTrees();
+            updateTree();
             break;
         // Q
         case 81:
             trees[currentTree].trunkThickness -= 1;
-            updateTrees();
+            updateTree();
             break;
         // E
         case 69:
             trees[currentTree].trunkThickness += 1;
-            updateTrees();
+            updateTree();
             break;
         // R
         case 82:
@@ -224,6 +247,10 @@ function keyPressed() {
         case 72:
             help = !help;
             break;
+        // C
+        case 67:
+            duplicateTree(currentTree);
+            break;
         default:
             break;
     }
@@ -233,7 +260,7 @@ function keyPressed() {
 
 function mouseClicked() {
     if (moveMode) {
-        updateTrees(mouseX, mouseY);
+        updateTree(mouseX, mouseY);
     } else {
         newTree(mouseX, mouseY);
     }
