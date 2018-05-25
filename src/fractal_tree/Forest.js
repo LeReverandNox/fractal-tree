@@ -165,7 +165,7 @@ class Forest {
             // R
             case 82:
                 this.keepOneTree();
-                this.nextTree(0);
+                this.selectNextTree(0);
                 this.resetTree(this.currentTreeIndex);
                 break;
             // N
