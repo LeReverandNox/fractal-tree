@@ -59,12 +59,12 @@ class Forest {
 
         tree.colorMode = sourceTree.colorMode;
         tree.depth = sourceTree.depth;
+        tree.trunkAngle = sourceTree.trunkAngle;
         tree.trunkLength = sourceTree.trunkLength;
         tree.trunkThickness = sourceTree.trunkThickness;
         tree.branchesCoef = sourceTree.branchesCoef;
         tree.branchesNb = sourceTree.branchesNb;
         tree.branchesAngle = sourceTree.branchesAngle;
-        tree.startingAngle = sourceTree.startingAngle;
         tree.x = sourceTree.x;
         tree.y = sourceTree.y
 
@@ -89,12 +89,12 @@ class Forest {
         switch (keyCode) {
             // UP
             case 38:
-                this.trees[this.currentTreeIndex].branchesAngle *= 1.05;
+                this.trees[this.currentTreeIndex].branchesAngle += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // DOWN
             case 40:
-                this.trees[this.currentTreeIndex].branchesAngle *= 0.95;
+                this.trees[this.currentTreeIndex].branchesAngle -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // LEFT
@@ -144,12 +144,12 @@ class Forest {
                 break;
             // A
             case 65:
-                this.trees[this.currentTreeIndex].startingAngle -= 1;
+                this.trees[this.currentTreeIndex].trunkAngle -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // D
             case 68:
-                this.trees[this.currentTreeIndex].startingAngle += 1;
+                this.trees[this.currentTreeIndex].trunkAngle += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // Q
