@@ -69,8 +69,8 @@ function showInfos() {
     text(`Trunk length: ${forest.trees[forest.currentTreeIndex].trunkLength}`, 5, 75);
     text(`Trunk thickness: ${forest.trees[forest.currentTreeIndex].trunkThickness}`, 5, 90);
     text(`Branches coef.: ${forest.trees[forest.currentTreeIndex].branchesCoef.toFixed(2)}`, 5, 105);
-    text(`Nb. branches: ${forest.trees[forest.currentTreeIndex].branchesNb}`, 5, 115);
-    text(`Branches ang.: ${forest.trees[forest.currentTreeIndex].branchesAngle}`, 5, 130);
+    text(`Nb. branches: ${forest.trees[forest.currentTreeIndex].branchesNb}`, 5, 120);
+    text(`Branches ang.: ${forest.trees[forest.currentTreeIndex].branchesAngle}`, 5, 135);
 
     if (help) {
         for (let i = 0; i < helpLines.length; i += 1) {
