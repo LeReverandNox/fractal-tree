@@ -17,9 +17,12 @@ class Tree {
         this.branchesAngle = branchesAngle;
         this.startingAngle = startingAngle;
         this.startingVector = startingVector;
+    }
+
+    update() {
+        this.branches = [];
         this.currDepth = 0;
         this.newBranches = 0;
-        this.branches = [];
 
         if (this.colorMode === Tree.RGB) {
             let startColor = floor(random(360));
