@@ -33,6 +33,7 @@ let helpLines = [
     'X : Delete active tree',
     'C : Duplicate active tree',
     'J : Hide HUD',
+    'P : Take a screenshot',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
