@@ -1,7 +1,6 @@
 // Todo:
 // Save scene
 // Import saved scene
-// Disable/enable the screen clean at every frame
 // Refacto with a big class to clean sketch.js
 
 const DEF_WIDTH = window.innerWidth - 10;
@@ -36,6 +35,7 @@ let helpLines = [
     'J : Hide HUD',
     'P : Take a screenshot',
     'B : Disable background',
+    'G : Disable canvas clean before refresh',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
@@ -46,6 +46,7 @@ let currentTree;
 let help = false;
 let hud = true;
 let disableBackground = false;
+let disableClear = false;
 
 function setup() {
     createCanvas(DEF_WIDTH, DEF_HEIGHT);
@@ -142,10 +143,12 @@ function showInfos() {
 }
 
 function draw() {
-    if (disableBackground) {
-        clear();
-    } else {
-        background(...DEF_BG_COLOR);
+    if (!disableClear) {
+        if (disableBackground) {
+            clear();
+        } else {
+            background(...DEF_BG_COLOR);
+        }
     }
 
     for (let tree of trees) {
@@ -277,6 +280,10 @@ function keyPressed() {
         // B
         case 66:
             disableBackground = !disableBackground;
+            break;
+        // G
+        case 71:
+            disableClear = !disableClear;
             break;
         default:
             break;
