@@ -10,12 +10,12 @@ class Tree {
     constructor(colorMode, depth, trunkAngle, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, x, y) {
         this.colorMode = colorMode;
         this.depth = depth;
+        this.trunkAngle = trunkAngle;
         this.trunkLength = trunkLength;
         this.trunkThickness = trunkThickness;
         this.branchesCoef = branchesCoef;
         this.branchesNb = branchesNb;
         this.branchesAngle = branchesAngle;
-        this.trunkAngle = trunkAngle;
         this.x = x;
         this.y = y;
     }
