@@ -12,9 +12,28 @@ const DEF_BRANCHES_COEF = 0.75;
 const DEF_BRANCHES_NB = 2;
 const DEF_BRANCHES_ANGLE = 60;
 
+
+let helpLines = [
+    'UP / DOWN    : Branches angle',
+    'LEFT / RIGHT : Branches length',
+    '[ / ] : Tree depth',
+    '- / + : Nb. of branches',
+    'A / D : Trunk angle',
+    'Q / E : Trunk thickness',
+    '9 / 0 : Trunk length',
+    'SPACE : Change color mode',
+    'R : Reset all trees',
+    'M : Change mode',
+    'N : Select next tree',
+    'X : Delete active tree',
+    'Click (MOVING) : Move active tree root',
+    'Click (CREATING) : Create tree at mouse pos'
+];
+
 let moveMode = true;
 let trees = [];
 let currentTree;
+let help = false;
 
 function setup() {
     createCanvas(DEF_WIDTH, DEF_HEIGHT);
@@ -75,12 +94,29 @@ function keepOneTree() {
     trees.splice(1);
 }
 
+function showInfos() {
+    fill(255);
+    textSize(15);
+    text(`MODE: ${moveMode ? 'MOVING' : 'CREATING'}`, 5, 15);
+    text(`Active tree: #${currentTree}`, 5, 30);
+
+    if (help) {
+        for (let i = 0; i < helpLines.length; i += 1) {
+            text(helpLines[i], 5, 75 + (15 * i));
+        }
+    } else {
+        text('H : Show / Hide help', 5, 75);
+    }
+}
+
 function draw() {
     background(...DEF_BG_COLOR);
 
     for (let tree of trees) {
         tree.show();
     }
+
+    showInfos();
 }
 
 function keyPressed() {
@@ -183,6 +219,10 @@ function keyPressed() {
         // X
         case 88:
             removeTree(currentTree);
+            break;
+        // H
+        case 72:
+            help = !help;
             break;
         default:
             break;
