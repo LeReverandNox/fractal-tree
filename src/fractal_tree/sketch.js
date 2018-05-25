@@ -1,7 +1,8 @@
 // Todo:
 // Save scene
 // Import saved scene
-// Export as png
+// Disable/enable the screen clean at every frame
+// Refacto with a big class to clean sketch.js
 
 const DEF_WIDTH = window.innerWidth - 10;
 const DEF_HEIGHT = window.innerHeight - 10;
@@ -34,6 +35,7 @@ let helpLines = [
     'C : Duplicate active tree',
     'J : Hide HUD',
     'P : Take a screenshot',
+    'B : Disable background',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
@@ -43,6 +45,7 @@ let trees = [];
 let currentTree;
 let help = false;
 let hud = true;
+let disableBackground = false;
 
 function setup() {
     createCanvas(DEF_WIDTH, DEF_HEIGHT);
@@ -120,7 +123,11 @@ function duplicateTree(i) {
 }
 
 function showInfos() {
-    fill(255);
+    if (disableBackground) {
+        fill(0);
+    } else {
+        fill(255);
+    }
     textSize(15);
     text(`MODE: ${moveMode ? 'MOVING' : 'CREATING'}`, 5, 15);
     text(`Active tree: #${currentTree}`, 5, 30);
@@ -135,7 +142,11 @@ function showInfos() {
 }
 
 function draw() {
-    background(...DEF_BG_COLOR);
+    if (disableBackground) {
+        clear();
+    } else {
+        background(...DEF_BG_COLOR);
+    }
 
     for (let tree of trees) {
         tree.show();
@@ -262,6 +273,10 @@ function keyPressed() {
         // P
         case 80:
             saveFrames('fractal-tree', 'png', 1, 1);
+            break;
+        // B
+        case 66:
+            disableBackground = !disableBackground;
             break;
         default:
             break;
