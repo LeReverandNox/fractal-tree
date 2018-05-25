@@ -7,7 +7,7 @@ class Tree {
         return 2;
     }
 
-    constructor(colorMode, depth, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, startingAngle, x, y) {
+    constructor(colorMode, depth, trunkAngle, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, x, y) {
         this.colorMode = colorMode;
         this.depth = depth;
         this.trunkLength = trunkLength;
@@ -15,7 +15,7 @@ class Tree {
         this.branchesCoef = branchesCoef;
         this.branchesNb = branchesNb;
         this.branchesAngle = branchesAngle;
-        this.startingAngle = startingAngle;
+        this.trunkAngle = trunkAngle;
         this.x = x;
         this.y = y;
     }
@@ -40,7 +40,7 @@ class Tree {
     generate() {
         // First recursion
         if (this.currDepth === 0) {
-            let branch = new Branch(this.startingVector, this.startingAngle, this.trunkLength, this.color, this.trunkThickness);
+            let branch = new Branch(this.startingVector, this.trunkAngle, this.trunkLength, this.color, this.trunkThickness);
             this.branches.push(branch);
             this.currDepth += 1;
             this.newBranches = 1;
