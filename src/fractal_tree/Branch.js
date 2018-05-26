@@ -7,7 +7,7 @@ class Branch {
         this.thickness = thickness;
         this.endVector;
 
-        colorMode(HSB, 360, 100, 100);
+        colorMode(HSB, 360, 100, 100, 100);
 
         angleMode(DEGREES);
         let destVector = createVector(0, length);

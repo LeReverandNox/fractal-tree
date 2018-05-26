@@ -7,9 +7,12 @@ class Tree {
         return 2;
     }
 
-    constructor(colorMode, depth, trunkAngle, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, x, y) {
+    constructor(colorMode, colorCoef, colorAlphaCoef, depth, trunkColor, trunkAngle, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, x, y) {
         this.colorMode = colorMode;
+        this.colorCoef = colorCoef;
+        this.colorAlphaCoef = colorAlphaCoef;
         this.depth = depth;
+        this.trunkColor = trunkColor;
         this.trunkAngle = trunkAngle;
         this.trunkLength = trunkLength;
         this.trunkThickness = trunkThickness;
@@ -26,13 +29,13 @@ class Tree {
         this.newBranches = 0;
 
         this.startingVector = createVector(this.x, this.y);
+
+        let alpha = 100 * this.colorAlphaCoef;
         if (this.colorMode === Tree.RGB) {
-            let startColor = floor(random(360));
-            this.color = [startColor, 97, 100];
+            this.color = [this.trunkColor, 97, 100, alpha];
         } else if (this.colorMode === Tree.BW) {
-            this.color = [0, 0, 100];
+            this.color = [0, 0, 100, alpha];
         }
-        this.colorCoef = (100/this.depth * 0.01);
 
         this.generate();
     }
@@ -58,10 +61,12 @@ class Tree {
             color[0] = (this.color[0] + ((this.colorCoef * this.currDepth) * 360)) % 360;
             color[1] = this.color[1];
             color[2] = this.color[2];
+            color[3] = this.color[3];
         } else if (this.colorMode === Tree.BW) {
             color[0] = this.color[0];
             color[1] = this.color[1];
             color[2] = this.color[2] - ((this.colorCoef * this.currDepth) * 100);
+            color[3] = this.color[3];
         }
 
         for (let i = 1; i <= this.newBranches; i += 1) {

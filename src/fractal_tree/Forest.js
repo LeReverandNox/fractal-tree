@@ -1,9 +1,12 @@
 class Forest {
-    constructor(treeX, treeY, treeColorMode, treeDepth, trunkAngle, trunkLength, trunkThickness, branchesCoef, branchesNb, branchesAngle) {
+    constructor(treeX, treeY, treeColorMode, treeColorCoef, treeColorAlphaCoef, treeDepth, trunkColor, trunkAngle, trunkLength, trunkThickness, branchesCoef, branchesNb, branchesAngle) {
         this.treeX = treeX;
         this.treeY = treeY;
         this.treeColorMode = treeColorMode;
+        this.treeColorCoef = treeColorCoef;
+        this.treeColorAlphaCoef = treeColorAlphaCoef;
         this.treeDepth = treeDepth;
+        this.trunkColor = trunkColor;
         this.trunkAngle = trunkAngle;
         this.trunkLength = trunkLength;
         this.trunkThickness = trunkThickness;
@@ -44,7 +47,10 @@ class Forest {
 
         if (tree) {
             tree.colorMode = this.treeColorMode;
+            tree.colorCoef = this.treeColorCoef;
+            tree.colorAlphaCoef = this.treeColorAlphaCoef;
             tree.depth = this.treeDepth;
+            tree.trunkColor = this.trunkColor;
             tree.trunkLength = this.trunkLength;
             tree.trunkThickness = this.trunkThickness;
             tree.branchesCoef = this.branchesCoef;
@@ -64,7 +70,10 @@ class Forest {
             let tree = new Tree();
 
             tree.colorMode = sourceTree.colorMode;
+            tree.colorCoef = sourceTree.colorCoef;
+            tree.colorAlphaCoef = sourceTree.colorAlphaCoef;
             tree.depth = sourceTree.depth;
+            tree.trunkColor = sourceTree.trunkColor;
             tree.trunkAngle = sourceTree.trunkAngle;
             tree.trunkLength = sourceTree.trunkLength;
             tree.trunkThickness = sourceTree.trunkThickness;
@@ -180,6 +189,36 @@ class Forest {
         // 0
         } else if (keyIsDown(48)) {
             this.getCurrentTree().trunkLength *= 1.05;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // 1
+        if (keyIsDown(49)) {
+            this.getCurrentTree().colorAlphaCoef *= 0.95;
+            this.updateTree(this.currentTreeIndex);
+        // 2
+        } else if (keyIsDown(50)) {
+            this.getCurrentTree().colorAlphaCoef *= 1.05;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // 3
+        if (keyIsDown(51)) {
+            this.getCurrentTree().trunkColor -= 1;
+            this.updateTree(this.currentTreeIndex);
+        // 4
+        } else if (keyIsDown(52)) {
+            this.getCurrentTree().trunkColor += 1;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // 5
+        if (keyIsDown(53)) {
+            this.getCurrentTree().colorCoef -= 0.01;
+            this.updateTree(this.currentTreeIndex);
+        // 6
+        } else if (keyIsDown(54)) {
+            this.getCurrentTree().colorCoef += 0.01;
             this.updateTree(this.currentTreeIndex);
         }
 

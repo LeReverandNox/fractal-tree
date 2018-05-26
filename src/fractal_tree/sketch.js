@@ -14,6 +14,9 @@ const TREE_X = WIDTH / 2;
 const TREE_Y = HEIGHT;
 const TREE_DEPTH = 1;
 const TREE_COLOR_MODE = Tree.RGB;
+const TREE_COLOR_ALPHA_COEF = 1;
+const TREE_COLOR_COEF = 0.95;
+const TRUNK_COLOR = 0;
 const TRUNK_ANGLE = 180;
 const TRUNK_LENGTH = 150;
 const TRUNK_THICKNESS = 3;
@@ -30,6 +33,9 @@ let helpLines = [
     'A / D : Trunk angle',
     'Q / E : Trunk thickness',
     '9 / 0 : Trunk length',
+    '1 / 2 : Change color alpha',
+    '3 / 4 : Change trunk color',
+    '5 / 6 : Change color coef.',
     'SPACE : Change color mode',
     'R : Reset all trees',
     'M : Change mode',
@@ -57,7 +63,7 @@ let rulers = false;
 function setup() {
     createCanvas(WIDTH, HEIGHT);
 
-    forest = new Forest(TREE_X, TREE_Y, TREE_COLOR_MODE, TREE_DEPTH, TRUNK_ANGLE, TRUNK_LENGTH, TRUNK_THICKNESS, BRANCHES_COEF, BRANCHES_NB, BRANCHES_ANGLE);
+    forest = new Forest(TREE_X, TREE_Y, TREE_COLOR_MODE, TREE_COLOR_COEF, TREE_COLOR_ALPHA_COEF ,TREE_DEPTH, TRUNK_COLOR, TRUNK_ANGLE, TRUNK_LENGTH, TRUNK_THICKNESS, BRANCHES_COEF, BRANCHES_NB, BRANCHES_ANGLE);
     forest.addTree();
 }
 
@@ -83,14 +89,18 @@ function showInfos() {
         text(`Branches coef.: ${tree.branchesCoef.toFixed(2)}`, 5, 105);
         text(`Nb. branches: ${tree.branchesNb}`, 5, 120);
         text(`Branches ang.: ${tree.branchesAngle}`, 5, 135);
+        text(`Color Alpha coef.: ${tree.colorAlphaCoef.toFixed(2)}`, 5, 150);
+        text(`Trunk color: ${tree.trunkColor}`, 5, 165);
+        text(`Color coef.: ${tree.colorCoef.toFixed(2)}`, 5, 180);
+
     }
 
     if (help) {
         for (let i = 0; i < helpLines.length; i += 1) {
-            text(helpLines[i], 5, 175 + (15 * i));
+            text(helpLines[i], 5, 200 + (15 * i));
         }
     } else {
-        text('H : Show / Hide help', 5, 175);
+        text('H : Show / Hide help', 5, 200);
     }
     pop();
 }
