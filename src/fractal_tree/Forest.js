@@ -29,144 +29,159 @@ class Forest {
     }
 
     updateTree(i, x, y) {
-        if (x && y) {
-            this.trees[i].x = x;
-            this.trees[i].y = y;
+        let tree = this.trees[i];
+        if (tree) {
+            if (x && y) {
+                tree.x = x;
+                tree.y = y;
+            }
+            tree.update();
         }
-        this.trees[i].update();
     }
 
     resetTree(i, x, y) {
         let tree = this.trees[i];
 
-        tree.colorMode = this.treeColorMode;
-        tree.depth = this.treeDepth;
-        tree.trunkLength = this.trunkLength;
-        tree.trunkThickness = this.trunkThickness;
-        tree.branchesCoef = this.branchesCoef;
-        tree.branchesNb = this.branchesNb;
-        tree.branchesAngle = this.branchesAngle;
-        tree.trunkAngle = this.trunkAngle;;
-        tree.x = x || this.treeX;
-        tree.y = y || this.treeY;
+        if (tree) {
+            tree.colorMode = this.treeColorMode;
+            tree.depth = this.treeDepth;
+            tree.trunkLength = this.trunkLength;
+            tree.trunkThickness = this.trunkThickness;
+            tree.branchesCoef = this.branchesCoef;
+            tree.branchesNb = this.branchesNb;
+            tree.branchesAngle = this.branchesAngle;
+            tree.trunkAngle = this.trunkAngle;;
+            tree.x = x || this.treeX;
+            tree.y = y || this.treeY;
 
-        tree.update();
+            tree.update();
+        }
     }
 
     duplicateTree(i) {
-        let tree = new Tree();
         let sourceTree = this.trees[i];
+        if (sourceTree) {
+            let tree = new Tree();
 
-        tree.colorMode = sourceTree.colorMode;
-        tree.depth = sourceTree.depth;
-        tree.trunkAngle = sourceTree.trunkAngle;
-        tree.trunkLength = sourceTree.trunkLength;
-        tree.trunkThickness = sourceTree.trunkThickness;
-        tree.branchesCoef = sourceTree.branchesCoef;
-        tree.branchesNb = sourceTree.branchesNb;
-        tree.branchesAngle = sourceTree.branchesAngle;
-        tree.x = sourceTree.x;
-        tree.y = sourceTree.y
+            tree.colorMode = sourceTree.colorMode;
+            tree.depth = sourceTree.depth;
+            tree.trunkAngle = sourceTree.trunkAngle;
+            tree.trunkLength = sourceTree.trunkLength;
+            tree.trunkThickness = sourceTree.trunkThickness;
+            tree.branchesCoef = sourceTree.branchesCoef;
+            tree.branchesNb = sourceTree.branchesNb;
+            tree.branchesAngle = sourceTree.branchesAngle;
+            tree.x = sourceTree.x;
+            tree.y = sourceTree.y
 
-        tree.update();
-        this.trees.push(tree);
-        this.selectNextTree(this.trees.length - 1);
+            tree.update();
+            this.trees.push(tree);
+            this.selectNextTree(this.trees.length - 1);
+        }
     }
 
     keepOneTree(i) {
         this.trees.splice(1);
+        this.selectNextTree();
+        this.resetTree(this.currentTreeIndex);
     }
 
     selectNextTree(i) {
         if (i !== undefined) {
             this.currentTreeIndex = i;
         } else {
-            this.currentTreeIndex = (this.currentTreeIndex + 1) % this.trees.length || 0;
+            if (!this.trees.length) {
+                this.currentTreeIndex = -1;
+            } else {
+                this.currentTreeIndex = this.currentTreeIndex >= this.trees.length - 1 ? 0 : this.currentTreeIndex + 1;
+            }
         }
+    }
+
+    getCurrentTree() {
+        return this.trees[this.currentTreeIndex];
     }
 
     keyboardEventHandler(keyCode) {
         switch (keyCode) {
             // UP
             case 38:
-                this.trees[this.currentTreeIndex].branchesAngle += 1;
+                this.getCurrentTree().branchesAngle += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // DOWN
             case 40:
-                this.trees[this.currentTreeIndex].branchesAngle -= 1;
+                this.getCurrentTree().branchesAngle -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // LEFT
             case 37:
-                this.trees[this.currentTreeIndex].branchesCoef *= 0.95;
+                this.getCurrentTree().branchesCoef *= 0.95;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // RIGHT
             case 39:
-                this.trees[this.currentTreeIndex].branchesCoef *= 1.05;
+                this.getCurrentTree().branchesCoef *= 1.05;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // +
             case 187:
-                this.trees[this.currentTreeIndex].branchesNb += 1;
+                this.getCurrentTree().branchesNb += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // -
             case 189:
-                this.trees[this.currentTreeIndex].branchesNb -= 1;
+                this.getCurrentTree().branchesNb -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // [
             case 219:
-                this.trees[this.currentTreeIndex].depth -= 1;
+                this.getCurrentTree().depth -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // ]
             case 221:
-                this.trees[this.currentTreeIndex].depth += 1;
+                this.getCurrentTree().depth += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // 9
             case 57:
-                this.trees[this.currentTreeIndex].trunkLength *= 0.95;
+                this.getCurrentTree().trunkLength *= 0.95;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // 0
             case 48:
-                this.trees[this.currentTreeIndex].trunkLength *= 1.05;
+                this.getCurrentTree().trunkLength *= 1.05;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // SPACE
             case 32:
-                this.trees[this.currentTreeIndex].colorMode = this.trees[this.currentTreeIndex].colorMode === Tree.RGB ? Tree.BW : Tree.RGB;
+                this.getCurrentTree().colorMode = this.getCurrentTree().colorMode === Tree.RGB ? Tree.BW : Tree.RGB;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // A
             case 65:
-                this.trees[this.currentTreeIndex].trunkAngle -= 1;
+                this.getCurrentTree().trunkAngle -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // D
             case 68:
-                this.trees[this.currentTreeIndex].trunkAngle += 1;
+                this.getCurrentTree().trunkAngle += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // Q
             case 81:
-                this.trees[this.currentTreeIndex].trunkThickness -= 1;
+                this.getCurrentTree().trunkThickness -= 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // E
             case 69:
-                this.trees[this.currentTreeIndex].trunkThickness += 1;
+                this.getCurrentTree().trunkThickness += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // R
             case 82:
                 this.keepOneTree();
-                this.selectNextTree(0);
-                this.resetTree(this.currentTreeIndex);
                 break;
             // N
             case 78:

@@ -56,6 +56,7 @@ function setup() {
 
 
 function showInfos() {
+    let tree = forest.getCurrentTree();
     if (disableBackground) {
         fill(0);
     } else {
@@ -64,13 +65,16 @@ function showInfos() {
     textSize(15);
     text(`MODE: ${moveMode ? 'MOVING' : 'CREATING'}`, 5, 15);
     text(`Active tree: #${forest.currentTreeIndex}`, 5, 30);
-    text(`Tree depth: ${forest.trees[forest.currentTreeIndex].depth}`, 5, 45);
-    text(`Trunk ang.: ${forest.trees[forest.currentTreeIndex].trunkAngle}`, 5, 60);
-    text(`Trunk length: ${forest.trees[forest.currentTreeIndex].trunkLength}`, 5, 75);
-    text(`Trunk thickness: ${forest.trees[forest.currentTreeIndex].trunkThickness}`, 5, 90);
-    text(`Branches coef.: ${forest.trees[forest.currentTreeIndex].branchesCoef.toFixed(2)}`, 5, 105);
-    text(`Nb. branches: ${forest.trees[forest.currentTreeIndex].branchesNb}`, 5, 120);
-    text(`Branches ang.: ${forest.trees[forest.currentTreeIndex].branchesAngle}`, 5, 135);
+
+    if (tree) {
+        text(`Tree depth: ${tree.depth}`, 5, 45);
+        text(`Trunk ang.: ${tree.trunkAngle}`, 5, 60);
+        text(`Trunk length: ${tree.trunkLength}`, 5, 75);
+        text(`Trunk thickness: ${tree.trunkThickness}`, 5, 90);
+        text(`Branches coef.: ${tree.branchesCoef.toFixed(2)}`, 5, 105);
+        text(`Nb. branches: ${tree.branchesNb}`, 5, 120);
+        text(`Branches ang.: ${tree.branchesAngle}`, 5, 135);
+    }
 
     if (help) {
         for (let i = 0; i < helpLines.length; i += 1) {
