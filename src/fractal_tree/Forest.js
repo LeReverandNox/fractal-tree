@@ -104,26 +104,6 @@ class Forest {
 
     keyboardEventHandler(keyCode) {
         switch (keyCode) {
-            // UP
-            case 38:
-                this.getCurrentTree().branchesAngle += 1;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // DOWN
-            case 40:
-                this.getCurrentTree().branchesAngle -= 1;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // LEFT
-            case 37:
-                this.getCurrentTree().branchesCoef *= 0.95;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // RIGHT
-            case 39:
-                this.getCurrentTree().branchesCoef *= 1.05;
-                this.updateTree(this.currentTreeIndex);
-                break;
             // +
             case 187:
                 this.getCurrentTree().branchesNb += 1;
@@ -144,39 +124,9 @@ class Forest {
                 this.getCurrentTree().depth += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
-            // 9
-            case 57:
-                this.getCurrentTree().trunkLength *= 0.95;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // 0
-            case 48:
-                this.getCurrentTree().trunkLength *= 1.05;
-                this.updateTree(this.currentTreeIndex);
-                break;
             // SPACE
             case 32:
                 this.getCurrentTree().colorMode = this.getCurrentTree().colorMode === Tree.RGB ? Tree.BW : Tree.RGB;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // A
-            case 65:
-                this.getCurrentTree().trunkAngle -= 1;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // D
-            case 68:
-                this.getCurrentTree().trunkAngle += 1;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // Q
-            case 81:
-                this.getCurrentTree().trunkThickness -= 1;
-                this.updateTree(this.currentTreeIndex);
-                break;
-            // E
-            case 69:
-                this.getCurrentTree().trunkThickness += 1;
                 this.updateTree(this.currentTreeIndex);
                 break;
             // R
@@ -201,6 +151,58 @@ class Forest {
     }
 
     show() {
+        frameRate(10);
+
+        // A
+        if (keyIsDown(65)) {
+            this.getCurrentTree().trunkAngle -= 1;
+            this.updateTree(this.currentTreeIndex);
+        // D
+        } else if (keyIsDown(68)) {
+            this.getCurrentTree().trunkAngle += 1;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // Q
+        if (keyIsDown(81)) {
+            this.getCurrentTree().trunkThickness -= 1;
+            this.updateTree(this.currentTreeIndex);
+        // E
+        } else if (keyIsDown(69)) {
+            this.getCurrentTree().trunkThickness += 1;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // 9
+        if (keyIsDown(57)) {
+            this.getCurrentTree().trunkLength *= 0.95;
+            this.updateTree(this.currentTreeIndex);
+        // 0
+        } else if (keyIsDown(48)) {
+            this.getCurrentTree().trunkLength *= 1.05;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // UP ARROW
+        if (keyIsDown(UP_ARROW)) {
+            this.getCurrentTree().branchesAngle += 1;
+            this.updateTree(this.currentTreeIndex);
+        // DOWN ARROW
+        } else if (keyIsDown(DOWN_ARROW)) {
+            this.getCurrentTree().branchesAngle -= 1;
+            this.updateTree(this.currentTreeIndex);
+        }
+
+        // LEFT ARROW
+        if (keyIsDown(LEFT_ARROW)) {
+            this.getCurrentTree().branchesCoef *= 0.95;
+            this.updateTree(this.currentTreeIndex);
+        // RIGHT ARROW
+        } else if (keyIsDown(RIGHT_ARROW)) {
+            this.getCurrentTree().branchesCoef *= 1.05;
+            this.updateTree(this.currentTreeIndex);
+        }
+
         for (let tree of this.trees) {
             tree.show();
         }
