@@ -72,12 +72,12 @@ class Tree {
             let thickness = (lastGenBranch.thickness * this.branchesCoef);
 
 
-            let offset = floor(this.branchesNb /2);
+            let offset = floor(this.branchesNb / 2);
             for (let i = -offset; i < this.branchesNb - offset; i += 1) {
                 let angle = lastGenBranch.angle + (this.branchesAngle * i);
 
                 if (this.branchesNb % 2 === 0) {
-                    angle += (this.branchesAngle/2);
+                    angle += this.branchesAngle / 2;
                 }
 
                 let branch = new Branch(startingVector, angle, length, color, thickness);
