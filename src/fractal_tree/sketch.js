@@ -2,8 +2,8 @@
 // Save scene
 // Import saved scene
 
-let WIDTH;
-let HEIGHT;
+const WIDTH = window.innerWidth;
+const HEIGHT = window.innerHeight;
 const BG_COLOR = [202, 8, 19];
 const RULERS_X_NB = 4
 const RULERS_Y_NB = 4
@@ -55,10 +55,8 @@ let disableClear = false;
 let rulers = false;
 
 function setup() {
-    WIDTH = WIDTH || windowWidth;
-    HEIGHT = HEIGHT || windowHeight;
-
     createCanvas(WIDTH, HEIGHT);
+
     forest = new Forest(TREE_X, TREE_Y, TREE_COLOR_MODE, TREE_DEPTH, TRUNK_ANGLE, TRUNK_LENGTH, TRUNK_THICKNESS, BRANCHES_COEF, BRANCHES_NB, BRANCHES_ANGLE);
     forest.addTree();
 }
