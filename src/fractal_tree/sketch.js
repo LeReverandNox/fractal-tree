@@ -5,6 +5,10 @@
 const WIDTH = window.innerWidth - 10;
 const HEIGHT = window.innerHeight - 10;
 const BG_COLOR = [202, 8, 19];
+const RULERS_X_NB = 4
+const RULERS_Y_NB = 4
+const DARK_MODE_COLOR = 255;
+const LIGHT_MODE_COLOR = 0;
 
 const TREE_X = WIDTH / 2;
 const TREE_Y = HEIGHT;
@@ -36,6 +40,7 @@ let helpLines = [
     'P : Take a screenshot',
     'B : Disable background',
     'G : Disable canvas clean before refresh',
+    'F : Show / hide rulers',
     'Click (MOVING) : Move active tree root',
     'Click (CREATING) : Create tree at mouse pos'
 ];
@@ -47,6 +52,7 @@ let help = false;
 let hud = true;
 let disableBackground = false;
 let disableClear = false;
+let rulers = false;
 
 function setup() {
     createCanvas(WIDTH, HEIGHT);
@@ -57,10 +63,12 @@ function setup() {
 
 function showInfos() {
     let tree = forest.getCurrentTree();
+
+    push();
     if (disableBackground) {
-        fill(0);
+        fill(LIGHT_MODE_COLOR);
     } else {
-        fill(255);
+        fill(DARK_MODE_COLOR);
     }
     textSize(15);
     text(`MODE: ${moveMode ? 'MOVING' : 'CREATING'}`, 5, 15);
@@ -83,6 +91,27 @@ function showInfos() {
     } else {
         text('H : Show / Hide help', 5, 175);
     }
+    pop();
+}
+
+function showRulers() {
+    push();
+    if (disableBackground) {
+        stroke(LIGHT_MODE_COLOR);
+    } else {
+        stroke(DARK_MODE_COLOR);
+    }
+
+    let xStep = ceil(HEIGHT / RULERS_X_NB);
+    let yStep = ceil(WIDTH / RULERS_Y_NB);
+
+    for (let i = 1; i <= RULERS_X_NB; i += 1) {
+        line(0, xStep * i, WIDTH, xStep * i);
+    }
+    for (let i = 1; i <= RULERS_Y_NB; i += 1) {
+        line(yStep * i, 0, yStep * i, HEIGHT);
+    }
+    pop();
 }
 
 function draw() {
@@ -92,6 +121,10 @@ function draw() {
         } else {
             background(...BG_COLOR);
         }
+    }
+
+    if (rulers) {
+        showRulers();
     }
 
     forest.show();
@@ -122,18 +155,17 @@ function keyPressed() {
         case 72:
             help = !help;
             break;
-        // H
+        // J
         case 74:
             hud = !hud;
             break;
         // M
         case 77:
             moveMode = !moveMode;
-            if (moveMode) {
-                console.log('MOVING');
-            } else {
-                console.log('CREATING');
-            }
+            break;
+        // F
+        case 70:
+            rulers = !rulers;
             break;
         default:
             break;
