@@ -53,6 +53,7 @@ let helpLines = [
 
 let forest;
 
+let c;
 let moveMode = true;
 let help = false;
 let hud = true;
@@ -61,7 +62,7 @@ let disableClear = false;
 let rulers = false;
 
 function setup() {
-    createCanvas(WIDTH, HEIGHT);
+    c = createCanvas(WIDTH, HEIGHT);
 
     forest = new Forest(TREE_X, TREE_Y, TREE_COLOR_MODE, TREE_COLOR_COEF, TREE_COLOR_ALPHA_COEF ,TREE_DEPTH, TRUNK_COLOR, TRUNK_ANGLE, TRUNK_LENGTH, TRUNK_THICKNESS, BRANCHES_COEF, BRANCHES_NB, BRANCHES_ANGLE);
     forest.addTree();
@@ -125,6 +126,10 @@ function showRulers() {
     pop();
 }
 
+function exportAsPng() {
+    saveCanvas(c, 'fractal-tree-canvas', 'png');
+};
+
 function draw() {
     if (!disableClear) {
         if (disableBackground) {
@@ -160,7 +165,7 @@ function keyPressed() {
             break;
         // P
         case 80:
-            saveFrames('fractal-tree', 'png', 1, 1);
+            exportAsPng();
             break;
         // H
         case 72:
