@@ -184,21 +184,21 @@ class Forest {
 
         // 9
         if (keyIsDown(57)) {
-            this.getCurrentTree().trunkLength *= 0.95;
+            this.getCurrentTree().trunkLength -= 1;
             this.updateTree(this.currentTreeIndex);
         // 0
         } else if (keyIsDown(48)) {
-            this.getCurrentTree().trunkLength *= 1.05;
+            this.getCurrentTree().trunkLength += 1;
             this.updateTree(this.currentTreeIndex);
         }
 
         // 1
         if (keyIsDown(49)) {
-            this.getCurrentTree().colorAlphaCoef *= 0.95;
+            this.getCurrentTree().colorAlphaCoef -= 0.01;
             this.updateTree(this.currentTreeIndex);
         // 2
         } else if (keyIsDown(50)) {
-            this.getCurrentTree().colorAlphaCoef *= 1.05;
+            this.getCurrentTree().colorAlphaCoef += 0.01;
             this.updateTree(this.currentTreeIndex);
         }
 
@@ -234,11 +234,11 @@ class Forest {
 
         // LEFT ARROW
         if (keyIsDown(LEFT_ARROW)) {
-            this.getCurrentTree().branchesCoef *= 0.95;
+            this.getCurrentTree().branchesCoef -= 0.01;
             this.updateTree(this.currentTreeIndex);
         // RIGHT ARROW
         } else if (keyIsDown(RIGHT_ARROW)) {
-            this.getCurrentTree().branchesCoef *= 1.05;
+            this.getCurrentTree().branchesCoef += 0.01;
             this.updateTree(this.currentTreeIndex);
         }
 
