@@ -16,7 +16,7 @@
     const TREE_COLOR_MODE = Tree.RGB;
     const TREE_COLOR_ALPHA_COEF = 1;
     const TREE_COLOR_COEF = 0.95;
-    const TRUNK_COLOR = 0;
+    const TRUNK_COLOR = Math.floor(Math.random() * 360);
     const TRUNK_ANGLE = 180;
     const TRUNK_LENGTH = 150;
     const TRUNK_THICKNESS = 3;
