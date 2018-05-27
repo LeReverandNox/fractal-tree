@@ -34,7 +34,7 @@ class Tree {
         if (this.colorMode === Tree.RGB) {
             this.color = [this.trunkColor, 97, 100, alpha];
         } else if (this.colorMode === Tree.BW) {
-            this.color = [0, 0, 100, alpha];
+            this.color = [0, 0, this.trunkColor, alpha];
         }
 
         this.generate();
