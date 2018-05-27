@@ -85,7 +85,7 @@
         if (tree) {
             text(`Tree depth: ${tree.depth}`, 5, 45);
             text(`Trunk ang.: ${tree.trunkAngle}`, 5, 60);
-            text(`Trunk length: ${floor(tree.trunkLength)}`, 5, 75);
+            text(`Trunk length: ${tree.trunkLength}`, 5, 75);
             text(`Trunk thickness: ${tree.trunkThickness}`, 5, 90);
             text(`Branches coef.: ${tree.branchesCoef.toFixed(2)}`, 5, 105);
             text(`Nb. branches: ${tree.branchesNb}`, 5, 120);
@@ -93,15 +93,16 @@
             text(`Color Alpha coef.: ${tree.colorAlphaCoef.toFixed(2)}`, 5, 150);
             text(`Trunk color: ${tree.trunkColor}`, 5, 165);
             text(`Color coef.: ${tree.colorCoef.toFixed(2)}`, 5, 180);
+            text(`Color mode: ${tree.colorMode}`, 5, 195);
 
         }
 
         if (help) {
             for (let i = 0; i < helpLines.length; i += 1) {
-                text(helpLines[i], 5, 220 + (15 * i));
+                text(helpLines[i], 5, 230 + (15 * i));
             }
         } else {
-            text('H : Show / Hide help', 5, 220);
+            text('H : Show / Hide help', 5, 230);
         }
         pop();
     }
