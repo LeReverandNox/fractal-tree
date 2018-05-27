@@ -1,10 +1,10 @@
 class Tree {
     static get RGB() {
-        return 1;
+        return 'RGB';
     }
 
     static get BW() {
-        return 2;
+        return 'Black & White';
     }
 
     constructor(colorMode, colorCoef, colorAlphaCoef, depth, trunkColor, trunkAngle, trunkLength, trunkThickness,branchesCoef, branchesNb, branchesAngle, x, y) {
@@ -21,6 +21,110 @@ class Tree {
         this.branchesAngle = branchesAngle;
         this.x = x;
         this.y = y;
+    }
+
+    get colorMode() {
+        return this._colorMode;
+    }
+    set colorMode(colorMode) {
+        this._colorMode = colorMode;
+        return this.colorMode;
+    }
+
+    get colorCoef() {
+        return this._colorCoef;
+    }
+    set colorCoef(colorCoef) {
+        if (colorCoef > 0) {
+            this._colorCoef = colorCoef;
+        }
+        return this.colorCoef;
+    }
+
+    get colorAlphaCoef() {
+        return this._colorAlphaCoef;
+    }
+    set colorAlphaCoef(colorAlphaCoef) {
+        if (colorAlphaCoef > 0) {
+            this._colorAlphaCoef = colorAlphaCoef;
+        }
+        return this.colorAlphaCoef;
+    }
+
+    get depth() {
+        return this._depth;
+    }
+    set depth(depth) {
+        if (depth > 0) {
+            this._depth = depth;
+        }
+        return this.depth;
+    }
+
+    get trunkColor() {
+        return this._trunkColor;
+    }
+    set trunkColor(trunkColor) {
+        if (trunkColor >= 0) {
+            this._trunkColor = trunkColor;
+        }
+        return this.trunkColor;
+    }
+
+    get trunkAngle() {
+        return this._trunkAngle;
+    }
+    set trunkAngle(trunkAngle) {
+        this._trunkAngle = trunkAngle;
+        return this.trunkAngle;
+    }
+
+    get trunkLength() {
+        return this._trunkLength;
+    }
+    set trunkLength(trunkLength) {
+        if (trunkLength >= 0) {
+            this._trunkLength = trunkLength;
+        }
+        return this.trunkLength;
+    }
+
+    get trunkThickness() {
+        return this._trunkThickness;
+    }
+    set trunkThickness(trunkThickness) {
+        if (trunkThickness > 0) {
+            this._trunkThickness = trunkThickness;
+        }
+        return this.trunkThickness;
+    }
+
+    get branchesCoef() {
+        return this._branchesCoef;
+    }
+    set branchesCoef(branchesCoef) {
+        if (branchesCoef > 0) {
+            this._branchesCoef = branchesCoef;
+        }
+        return this.branchesCoef;
+    }
+
+    get branchesNb() {
+        return this._branchesNb;
+    }
+    set branchesNb(branchesNb) {
+        if (branchesNb > 0) {
+            this._branchesNb = branchesNb;
+        }
+        return this.branchesNb;
+    }
+
+    get branchesAngle() {
+        return this._branchesAngle;
+    }
+    set branchesAngle(branchesAngle) {
+        this._branchesAngle = branchesAngle;
+        return this.branchesAngle;
     }
 
     update() {
