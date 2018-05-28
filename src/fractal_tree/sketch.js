@@ -63,6 +63,8 @@
 
     function setup() {
         c = createCanvas(WIDTH, HEIGHT);
+        colorMode(HSB, 360, 100, 100, 100);
+        angleMode(DEGREES);
 
         forest = new Forest(TREE_X, TREE_Y, TREE_COLOR_MODE, TREE_COLOR_COEF, TREE_COLOR_ALPHA_COEF ,TREE_DEPTH, TRUNK_COLOR, TRUNK_ANGLE, TRUNK_LENGTH, TRUNK_THICKNESS, BRANCHES_COEF, BRANCHES_NB, BRANCHES_ANGLE);
         forest.addTree();
