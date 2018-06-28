@@ -1,0 +1,17 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: fractal-tree-rodolphe-laidet-com-certificate
+  namespace: fractal-tree
+spec:
+  secretName: fractal-tree-rodolphe-laidet-com-tls
+  issuerRef:
+    name: letsencrypt-cluster
+    kind: ClusterIssuer
+  commonName: fractal-tree.rodolphe-laidet.com
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - fractal-tree.rodolphe-laidet.com

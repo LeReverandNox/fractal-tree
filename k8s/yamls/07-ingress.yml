@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fractal-tree-ingress
+  namespace: fractal-tree
+spec:
+  rules:
+  - host: fractal-tree.rodolphe-laidet.com
+    http:
+      paths:
+      - backend:
+          serviceName: fractal-tree-service
+          servicePort: 8000
+        path: /
+  tls:
+  - hosts:
+    - fractal-tree.rodolphe-laidet.com
+    secretName: fractal-tree-rodolphe-laidet-com-tls
