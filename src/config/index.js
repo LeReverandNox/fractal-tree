@@ -1,5 +1,5 @@
 module.exports = {
   server: {
-      port: process.env.APP_PORT || 80
+      port: process.env.APP_PORT || 3000
   }
 };
