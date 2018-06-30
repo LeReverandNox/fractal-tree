@@ -11,8 +11,7 @@ ADD src/package.json /src
 RUN npm install
 
 ADD src /src
-ADD files /
 
-EXPOSE 80
+EXPOSE 3000
 
 ENTRYPOINT ["npm", "start"]
