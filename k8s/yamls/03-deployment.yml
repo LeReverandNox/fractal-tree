@@ -10,19 +10,15 @@ spec:
       labels:
         app: fractal-tree
     spec:
-      volumes:
-      - name: fractal-tree-src-pvs
-        persistentVolumeClaim:
-          claimName: fractal-tree-src-pvc
       containers:
       - name: fractal-tree
-        image: lereverandnox/bower
+        image: lereverandnox/fractal-tree
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
           httpGet:
             path: /
-            port: 8000
+            port: 3000
             scheme: HTTP
           initialDelaySeconds: 10
           periodSeconds: 2
@@ -32,17 +28,14 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /
-            port: 8000
+            port: 3000
             scheme: HTTP
           initialDelaySeconds: 10
           periodSeconds: 2
           successThreshold: 2
           timeoutSeconds: 2
         ports:
-        - containerPort: 8000
+        - containerPort: 3000
           protocol: TCP
           name: ft-http
-        volumeMounts:
-        - mountPath: "/home/bower/workspace"
-          name: fractal-tree-src-pvs
       restartPolicy: Always
