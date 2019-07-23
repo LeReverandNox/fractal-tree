@@ -1,10 +1,12 @@
 FROM node:10.5
 
 RUN mkdir /src
-RUN chown -R node:node /src
+
 WORKDIR /src
 
 ADD src/package.json /src
+
+RUN chown -R node:node /src
 
 USER node
 RUN npm install
