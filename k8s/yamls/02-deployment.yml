@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fractal-tree-deployment
   namespace: fractal-tree
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: fractal-tree
   template:
     metadata:
       labels:
