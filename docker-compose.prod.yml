@@ -1,0 +1,22 @@
+version: "3"
+services:
+  fractal-tree:
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      # HTTP
+      - traefik.http.routers.$ROUTER-http.entrypoints=http
+      - traefik.http.routers.$ROUTER-http.rule=Host("$FT_HOST")
+
+      # Redirect
+      - traefik.http.routers.$ROUTER-http.middlewares=https-redirect@docker
+
+      # HTTPS
+      - traefik.http.routers.$ROUTER-https.entrypoints=https
+      - traefik.http.routers.$ROUTER-https.rule=Host("$FT_HOST")
+      - traefik.http.routers.$ROUTER-https.tls=true
+      - traefik.http.routers.$ROUTER-https.tls.certresolver=le-prod
+networks:
+  proxy:
+    external: true

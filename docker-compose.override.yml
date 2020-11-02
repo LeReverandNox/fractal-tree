@@ -1,0 +1,10 @@
+version: "3"
+services:
+  fractal-tree:
+    build: ./
+    volumes:
+      - $FT_SRC:/src
+    ports:
+      - $FT_PORT:3000/tcp
+    entrypoint: ["npm", "run", "dev"]
+

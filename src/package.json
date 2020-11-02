@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "forever --minUptime 1 -c 'nodemon --exitcrash' server.js"
+    "start": "forever --minUptime 1 server.js",
+    "dev": "forever --minUptime 1 -c 'nodemon --exitcrash' server.js"
   },
   "author": "",
   "license": "ISC",

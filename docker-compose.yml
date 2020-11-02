@@ -1,0 +1,6 @@
+version: "3"
+services:
+  fractal-tree:
+    container_name: fractal-tree
+    image: lereverandnox/fractal-tree
+
