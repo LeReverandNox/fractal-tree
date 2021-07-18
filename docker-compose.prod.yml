@@ -5,10 +5,10 @@ services:
     networks:
       - proxy
     labels:
-      - traefik.enable=true
+      - "traefik.enable=true"
       # HTTPS
-      - traefik.http.routers.$ROUTER-https.entrypoints=https
-      - traefik.http.routers.$ROUTER-https.rule=Host(`$FT_HOST`)
+      - "traefik.http.routers.$ROUTER-https.entrypoints=https"
+      - "traefik.http.routers.$ROUTER-https.rule=Host(`$FT_HOST`)"
 networks:
   proxy:
     external: true
